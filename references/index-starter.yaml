@@ -29,3 +29,14 @@ restructure_policy:
   split_threshold_entries: 25
   duplicate_overlap_ratio: 0.35
   review_every_n_updates: 10
+history_policy:
+  enabled: true
+  events_file: "history/events.ndjson"
+  projects_file: "history/projects.yaml"
+  required_event_fields:
+    - "event_id"
+    - "timestamp_utc"
+    - "action"
+    - "lesson_id"
+    - "lesson_path"
+    - "project_id"

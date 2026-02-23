@@ -43,6 +43,8 @@ Use this structure:
 - `$CODEX_HOME/lesson-learned/index.yaml`: category tree, tags, and file pointers
 - `$CODEX_HOME/lesson-learned/lessons/`: hierarchical lesson files
 - `$CODEX_HOME/lesson-learned/archive/`: superseded entries or old category snapshots
+- `$CODEX_HOME/lesson-learned/history/events.ndjson`: append-only change history
+- `$CODEX_HOME/lesson-learned/history/projects.yaml`: project identity map for audit
 
 If the folder does not exist, create it with the starter layout from `references/storage-layout.md`.
 
@@ -65,6 +67,9 @@ If the folder does not exist, create it with the starter layout from `references
 - The user corrected behavior or pointed out a repeat mistake.
 - The user explicitly asked to remember something.
 - A non-obvious tactic prevented a likely failure.
+- For every lesson mutation (`added`, `updated`, `superseded`, `restructured`), append one history event to `history/events.ndjson`.
+- Include project metadata in history events (`project_id`, optional `project_name`) so users can filter recent lessons by source project.
+- Keep active lesson paths and titles project-agnostic; store project context only in `evidence` fields and history events.
 
 ### 4. Update or Supersede
 - Update an existing lesson when the core rule is still correct but incomplete.
@@ -116,6 +121,7 @@ If no direct match is found, read one general file and proceed without broad loa
 - On every task: retrieve small, apply, then optionally write.
 - Every few tasks: prune duplicates and merge near-identical lessons.
 - When structure drifts: perform a small taxonomy refactor and update `index.yaml`.
+- Periodically compact/roll history by month into `archive/` snapshots if `events.ndjson` becomes slow to scan.
 
 ## Quick Start Commands
 
@@ -140,3 +146,4 @@ if (-not (Test-Path (Join-Path $memoryRoot "index.yaml"))) {
 - Read `references/storage-layout.md` for folder layout and taxonomy rules.
 - Read `references/entry-template.md` for entry schema and examples.
 - Read `references/index-starter.yaml` when bootstrapping a new memory store.
+- Read `references/history-schema.md` for history event schema and query patterns.
