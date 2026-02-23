@@ -1,0 +1,31 @@
+version: 1
+updated_at: "1970-01-01"
+categories:
+  - id: "general"
+    path: "lessons/general"
+    tags: ["process", "communication", "validation"]
+    children:
+      - id: "behavior"
+        path: "lessons/general/behavior.md"
+        tags: ["clarify-requirements", "user-feedback"]
+      - id: "validation"
+        path: "lessons/general/validation.md"
+        tags: ["tests", "verification", "regression-prevention"]
+  - id: "tech"
+    path: "lessons/tech"
+    tags: ["language", "framework", "tooling"]
+  - id: "failure-modes"
+    path: "lessons/failure-modes"
+    tags: ["bug-patterns", "root-cause", "preventive-rules"]
+retrieval_defaults:
+  always_include:
+    - "lessons/general/behavior.md"
+  max_files: 3
+naming_policy:
+  category_names: "general-signal-based"
+  forbid_project_specific_names: true
+  preferred_axes: ["technology", "failure-mode", "lifecycle", "behavior"]
+restructure_policy:
+  split_threshold_entries: 25
+  duplicate_overlap_ratio: 0.35
+  review_every_n_updates: 10

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lesson Learned"
+  short_description: "Capture and reuse fixes from past mistakes"
+  default_prompt: "Use $lesson-learned to complete this task while checking and updating learned lessons."
