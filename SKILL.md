@@ -1,6 +1,6 @@
 ---
 name: lesson-learned
-description: Persistent lesson-learning workflow that stores, retrieves, updates, and restructures bug-prevention knowledge across tasks. Use for most coding and debugging tasks, especially when implementing features, fixing regressions, reviewing code, handling repeated failures, or when the user asks to "remember this for next time." Use to record what failed, why it failed, and how it was fixed; retrieve relevant lessons before implementation; and revise or supersede outdated lessons when new evidence appears.
+description: Persistent cross-project lesson-memory workflow for coding tasks. Use by default during implementation, debugging, review, and regression fixes. Trigger immediately when a bug is fixed, user feedback corrects agent behavior, the user asks to "remember this", or a reusable prevention rule is discovered. Retrieve a small relevant lesson set before work, apply lessons as concrete checks, then add/update/supersede/restructure runtime memory and append history events.
 ---
 
 # Lesson Learned
@@ -12,10 +12,16 @@ Read small relevant lesson files before work, apply matching lessons during work
 
 ## Required Response Suffix
 
-When this skill is used, append this exact one-line suffix at the end of the final user response:
+When this skill is used, append this exact suffix block at the end of the final user response:
 
 ```text
-[lesson-learned] used=<yes|no>; read=<n>; applied=<n>; added=<n>; updated=<n>; restructured=<yes|no>
+[lesson-learned]
+used=<yes|no>
+read=<n>
+applied=<n>
+added=<n>
+updated=<n>
+restructured=<yes|no>
 ```
 
 Keep values terse. Use integers for counts.
@@ -64,7 +70,7 @@ If the folder does not exist, create it with the starter layout from `references
 - Before re-adding previously removed behavior, ask for confirmation.
 
 ### 3. Capture After Work
-- Add a lesson entry when any of these are true:
+- Add or update lesson memory when any of these are true:
 - A bug/regression was fixed.
 - The user corrected behavior or pointed out a repeat mistake.
 - The user explicitly asked to remember something.
@@ -129,7 +135,7 @@ If no direct match is found, read one general file and proceed without broad loa
 
 ## Minimal Maintenance Routine
 
-- On every task: retrieve small, apply, then optionally write.
+- On every task: retrieve small, apply, then write when new learning occurred.
 - Every few tasks: prune duplicates and merge near-identical lessons.
 - When structure drifts: perform a small taxonomy refactor and update `index.yaml`.
 - Periodically compact/roll history by month into `archive/` snapshots if `events.ndjson` becomes slow to scan.
