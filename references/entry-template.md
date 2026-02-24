@@ -34,5 +34,7 @@ last_validated: "YYYY-MM-DD"
 - Include at least one concrete prevention check.
 - Keep lesson IDs and titles generic; do not include project/app names.
 - If the lesson originated in a specific app, keep that detail only under `evidence`.
+- For user-correction incidents, tag with reusable failure modes (for example `assumption`, `intent-mismatch`, `regression-after-edit`).
+- For feedback-derived lessons, include an explicit checklist item that prevents repeating the corrected behavior.
 - Update `confidence` as evidence improves.
 - If inaccurate, create a replacement entry and set `supersedes`.

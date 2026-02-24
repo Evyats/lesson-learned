@@ -60,6 +60,8 @@ If the folder does not exist, create it with the starter layout from `references
 - Convert matched lessons into concrete checks while implementing.
 - Prefer prevention checks over post-hoc fixes (input validation, edge-case guards, compatibility checks, test coverage).
 - If multiple lessons conflict, prioritize the most recently validated and highest-confidence entry.
+- Treat explicit user edits/removals as authoritative intent unless the user asks to restore them.
+- Before re-adding previously removed behavior, ask for confirmation.
 
 ### 3. Capture After Work
 - Add a lesson entry when any of these are true:
@@ -67,9 +69,17 @@ If the folder does not exist, create it with the starter layout from `references
 - The user corrected behavior or pointed out a repeat mistake.
 - The user explicitly asked to remember something.
 - A non-obvious tactic prevented a likely failure.
+- The agent made an incorrect assumption and user feedback clarified the correct behavior.
 - For every lesson mutation (`added`, `updated`, `superseded`, `restructured`), append one history event to `history/events.ndjson`.
 - Include project metadata in history events (`project_id`, optional `project_name`) so users can filter recent lessons by source project.
 - Keep active lesson paths and titles project-agnostic; store project context only in `evidence` fields and history events.
+
+### 3.1 Mandatory Capture: Feedback-To-Memory Rule
+- If the task revealed a new actionable rule (bug fixed, user correction, failed assumption, explicit "remember this"), the agent must add or update runtime lesson memory in the same task.
+- Do not end with acknowledgment only; at least one memory mutation (`added` or `updated`) is required when new learning occurred.
+- If no memory mutation was made, explicitly justify why no new lesson was learned.
+- Scope lessons to reusable behavior, not one-off project phrasing.
+- Example incident class: re-adding behavior intentionally removed by the user; capture the general rule, not project-specific details.
 
 ### 4. Update or Supersede
 - Update an existing lesson when the core rule is still correct but incomplete.
@@ -113,6 +123,7 @@ Use the template in `references/entry-template.md`.
 - failure mode (`off-by-one`, `race-condition`, `api-contract`, `escaping`, etc.)
 - lifecycle phase (`implementation`, `review`, `test`, `release`)
 - user preference lessons (`ask-clarifying-questions`, `verify-on-web-when-volatile`)
+- feedback-derived failures (`assumption`, `intent-mismatch`, `stale-implementation`, `regression-after-edit`)
 
 If no direct match is found, read one general file and proceed without broad loading.
 

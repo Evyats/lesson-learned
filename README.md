@@ -7,6 +7,7 @@
 - Reads a small set of relevant past lessons before implementation.
 - Applies those lessons as concrete checks while coding, debugging, and reviewing.
 - Writes new lessons after meaningful fixes, regressions, or explicit "remember this" requests.
+- Requires immediate memory update whenever user feedback or task outcomes reveal a new actionable rule.
 - Updates or supersedes outdated lessons when better evidence appears.
 - Keeps lessons organized in a fluid category structure that can be split/merged over time.
 
